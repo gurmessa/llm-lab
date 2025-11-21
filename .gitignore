@@ -13,6 +13,7 @@ venv/
 .env/
 .env.bak/
 .venv/
+myenv/
 
 # --- FastAPI / Uvicorn ---
 # Logs
