@@ -1,7 +1,7 @@
 import pytest
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-from app.services.metrics.structural_metric import StructuralMetric
+from ...services.metrics.structural_metric import StructuralMetric
 
 
 @pytest.fixture
