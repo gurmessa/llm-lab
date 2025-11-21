@@ -14,3 +14,8 @@ pip install -r requirements.txt
 ```sh
 python3 -m IPython
 ```
+
+### Run Test
+```sh
+pytest -v
+```
