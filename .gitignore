@@ -1,0 +1,52 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+*.sqlite3
+
+# Virtual environments
+venv/
+.env/
+.env.bak/
+.venv/
+
+# --- FastAPI / Uvicorn ---
+# Logs
+*.log
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+
+# --- Tests ---
+htmlcov/
+.coverage
+coverage.xml
+.pytest_cache/
+
+# --- Dependencies ---
+pip-wheel-metadata/
+*.whl
+dist/
+build/
+
+# --- Env Files ---
+.env.local
+.env.development
+.env.production
+.env.test
+
+# --- Mypy / Ruff / Other Tools ---
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+
+# --- Cache ---
+__pycache__/
+.cache/
