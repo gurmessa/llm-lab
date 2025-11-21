@@ -11,8 +11,10 @@ __pycache__/
 # Virtual environments
 venv/
 .env/
+backend/.env
 .env.bak/
 .venv/
+myenv/
 
 # --- FastAPI / Uvicorn ---
 # Logs
