@@ -1,10 +1,10 @@
 import re
 
 import nltk
-from nltk.tokenize import sent_tokenize, word_tokenize
 import numpy as np
-from base import Metric
+from nltk.tokenize import sent_tokenize, word_tokenize
 
+from .base import Metric
 
 nltk.download("punkt")  # Download once
 
@@ -98,12 +98,6 @@ class StructuralMetric(Metric):
                 proper_caps += 1
         return proper_caps / len(sentences)
 
-    def _get_proper_capitalization_score(self, sentences: list) -> float:
-        if not sentences:
-            return 0.0
-        proper_caps = sum(1 for sent in sentences if sent and sent[0].isupper())
-        return proper_caps / len(sentences)
-
     def _get_list_enumeration_score(self, text: str, sentences: list) -> float:
         list_indicators = text.count("•") + text.count("- ") + text.count("* ")
         enumeration_patterns = re.findall(r"\b\d+\.\s|\b[a-z]\)\s", text.lower())
@@ -150,7 +144,7 @@ class StructuralMetric(Metric):
         score += self._get_proper_capitalization_score(sentences)
 
         # 7. Lists or enumerations
-        score += self._get_list_enumeration_score(text)
+        score += self._get_list_enumeration_score(text, sentences)
 
         # 8. Conclusion indicators
         score += self._get_conclusion_indicator_score(text)
