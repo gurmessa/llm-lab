@@ -1,5 +1,5 @@
 Story,Task,Estimate min (hr),Estimate max (hr),Actual,Comment,Task Link
-Backend API,Setup BE project #4,1,2,,,https://github.com/gurmessa/llm-lab/issues/4
+Backend API,Setup BE project #4,1,2,0.5,,https://github.com/gurmessa/llm-lab/issues/4
 Backend API,models & db #5,2,4,,,https://github.com/gurmessa/llm-lab/issues/5
 Backend API,API Endpoints #6,2,4,,,https://github.com/gurmessa/llm-lab/issues/6
 Backend API,Export CSV #14,1,2,,,https://github.com/gurmessa/llm-lab/issues/14
