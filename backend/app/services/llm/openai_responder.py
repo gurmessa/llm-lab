@@ -6,9 +6,9 @@ from openai import APIError, APIStatusError, APITimeoutError, OpenAI, RateLimitE
 from .constants import (
     ALLOWED_OPENAI_MODELS,
     DEFAULT_MAX_TOKENS,
+    DEFAULT_OPENAI_MODEL_NAME,
     DEFAULT_TEMPERATURE,
     DEFAULT_TOP_P,
-    OPEN_AI_GPT_4_1_NANO,
 )
 from .exceptions import ModelNotAllowedError, OpenAIAPIError
 
@@ -16,7 +16,7 @@ load_dotenv()
 
 
 class OpenAIResponder:
-    def __init__(self, model: str = OPEN_AI_GPT_4_1_NANO):
+    def __init__(self, model: str = DEFAULT_OPENAI_MODEL_NAME):
         self.api_key = os.getenv("OPENAI_API_KEY")
         self.client = OpenAI(api_key=self.api_key)
         self.model = model
