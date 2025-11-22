@@ -10,6 +10,11 @@ source myenv/bin/activate
 pip install -r requirements.txt
 ```
 
+### 3. Apply migration
+```sh
+alembic upgrade head
+```
+
 ### Launch IPython
 ```sh
 python3 -m IPython
