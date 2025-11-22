@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 
+from app.api.experiment_router import router as experiment_router
+
 app = FastAPI(title="LLM Lab Backend")
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+app.include_router(experiment_router)
