@@ -7,6 +7,7 @@ __pycache__/
 *.egg
 *.egg-info/
 *.sqlite3
+llm_lab.db
 
 # Virtual environments
 venv/
