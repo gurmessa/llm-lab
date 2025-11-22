@@ -5,6 +5,7 @@ import numpy as np
 from nltk.tokenize import sent_tokenize, word_tokenize
 
 from .base import Metric
+from .constants import CONCLUSION_WORDS, STRUCTURAL_INDICATORS
 
 nltk.download("punkt")  # Download once
 
@@ -25,24 +26,8 @@ class StructuralMetric(Metric):
     """
 
     def __init__(self):
-        self.structural_indicators = [
-            "first",
-            "second",
-            "third",
-            "finally",
-            "in conclusion",
-            "however",
-            "moreover",
-            "additionally",
-            "therefore",
-            "thus",
-        ]
-        self.conclusion_words = [
-            "in summary",
-            "in conclusion",
-            "to summarize",
-            "overall",
-        ]
+        self.structural_indicators = STRUCTURAL_INDICATORS
+        self.conclusion_words = CONCLUSION_WORDS
 
     def _get_length_appropriateness_score(self, word_count: int) -> float:
         if MIN_WORDS_FULL <= word_count <= MAX_WORDS_FULL:
