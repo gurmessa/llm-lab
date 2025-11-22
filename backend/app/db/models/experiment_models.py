@@ -2,7 +2,7 @@ import uuid
 
 from sqlalchemy import JSON, Column
 from sqlalchemy import Enum as SQLEnum
-from sqlalchemy import Float, ForeignKey, Integer, String, Text, Integer
+from sqlalchemy import Float, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
 
 from ..base import Base, TimestampMixin
