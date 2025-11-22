@@ -406,3 +406,52 @@ class TestCreateExperimentAPI:
         # Verify orchestrator was called
         mock_orchestrator.assert_called_once()
         mock_orchestrator_instance.run_experiment.assert_called_once()
+
+
+class TestExportExperimentCSVAPI:
+    def test_export_experiment_csv(self, client, test_db):
+        # Create experiment
+        experiment = Experiment(
+            name="Test Experiment",
+            user_prompt="Test prompt",
+            model_name=DEFAULT_OPENAI_MODEL_NAME,
+            total_runs=1,
+            status=ExperimentStatus.COMPLETED.value,
+        )
+        test_db.add(experiment)
+        test_db.commit()
+
+        # Create run
+        run = ExperimentRun(
+            experiment_id=experiment.id,
+            temperature=0.7,
+            top_p=0.9,
+            max_output_tokens=1000,
+        )
+
+        test_db.add(run)
+        test_db.commit()
+
+        # Create response with metric
+        response = ResponseRecord(
+            experiment_run_id=run.id,
+            generated_text="Test response",
+            status=ResponseStatus.COMPLETED.value,
+            metrics={"overall_score": 0.95},
+        )
+        test_db.add(response)
+        test_db.commit()
+
+        # Call the CSV export endpoint
+        resp = client.get(f"/experiments/{experiment.id}/export/csv")
+
+        assert resp.status_code == 200
+        assert "text/csv" in resp.headers["content-type"]
+        assert (
+            f"attachment; filename=experiment_{experiment.id}.csv"
+            in resp.headers["content-disposition"]
+        )
+
+        csv_content = resp.content.decode()
+        assert "Run ID,Temperature,Top P,Response Text,Overall Metric" in csv_content
+        assert "1,0.7,0.9,Test response," in csv_content  # metric is None, so empty

@@ -1,6 +1,8 @@
+import csv
+from io import StringIO
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 
 from ..db.models.experiment_models import Experiment, ExperimentRun
@@ -77,3 +79,42 @@ def create_experiment(
     experiment = orchestrator.run_experiment()
 
     return experiment
+
+
+@router.get("/{experiment_id}/export/csv")
+def export_experiment_csv(experiment_id: int, db: Session = Depends(get_db)):
+    experiment = db.query(Experiment).filter(Experiment.id == experiment_id).first()
+    if not experiment:
+        raise HTTPException(status_code=404, detail="Experiment not found")
+
+    # Build CSV as string
+    csv_file = StringIO()
+    writer = csv.writer(csv_file)
+
+    # Header
+    writer.writerow(
+        ["Run ID", "Temperature", "Top P", "Response Text", "Overall Metric"]
+    )
+
+    # Rows
+    for run in experiment.runs:
+        response = run.response  # because it's one-to-one
+        if response:
+            writer.writerow(
+                [
+                    run.id,
+                    run.temperature,
+                    run.top_p,
+                    response.generated_text or "",
+                    response.metrics.get("overall") if response.metrics else "",
+                ]
+            )
+    csv_content = csv_file.getvalue()
+
+    return Response(
+        content=csv_content,
+        media_type="text/csv",
+        headers={
+            "Content-Disposition": f"attachment; filename=experiment_{experiment_id}.csv"
+        },
+    )
