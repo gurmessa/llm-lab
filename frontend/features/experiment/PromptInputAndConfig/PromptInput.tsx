@@ -21,7 +21,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { RunConfig } from "./RunConfig";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { createExperiment } from "@/services/services";
+import { createExperiment, exportExperimentCsv } from "@/services/services";
 import { ExperimentDetail } from "@/types/types";
 
 interface RunSettings {
@@ -100,6 +100,10 @@ export default function PromptInput({ experiment }: PromptInputProps) {
     }
   }
 
+  const handleExportCsv = async () => {
+    if (!experiment) return;
+    await exportExperimentCsv(experiment.id);
+  }
 
   return (
     <div className="bg-background p-4 sm:p-8">
@@ -203,7 +207,7 @@ export default function PromptInput({ experiment }: PromptInputProps) {
           <Button onClick={handleCreateExperiment} className="">
             Run Experiments
           </Button>
-          <Button className="border-2 font-medium px-8 py-3 w-full sm:w-auto" variant="outline" disabled>
+          <Button onClick={handleExportCsv} variant="outline" disabled={!experiment}>
             Export CSV
           </Button>
         </div>
