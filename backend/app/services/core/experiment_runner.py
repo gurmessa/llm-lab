@@ -47,7 +47,7 @@ class ExperimentRunner:
         )
 
         # 2. Calculate overall metrics
-        score_dict = self.metric.evaluate(response)
+        score_dict = self.metric.compute(response)
 
         # 3. Return combined result
         return {"llm_response": response, "metrics": score_dict}

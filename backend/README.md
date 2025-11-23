@@ -10,22 +10,24 @@ source myenv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Apply migration
+### 3. Apply migrations
 ```sh
 alembic upgrade head
 ```
 
-### 4. Run server
+### 4. Run FastAPI server
 ```sh
-uvicorn main:app --reload --port=8083
+cd backend
+uvicorn app.main:app --reload --port=8083
 ```
 
-### Launch IPython
+### Launch IPython Shell
 ```sh
 python3 -m IPython
 ```
 
-### Run Test
+### Run Tests
 ```sh
+cd backend
 pytest -v
 ```
