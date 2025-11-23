@@ -1,6 +1,7 @@
+import ExperimentPage from "./components/ExperimentPage";
 
 export default function Home() {
   return (
-    <p>Experiment Main </p>
+    <ExperimentPage />
   );
 }
