@@ -1,12 +1,5 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart"
-import { BarChart, Bar, XAxis, CartesianGrid } from "recharts"
 import {ExperimentDetail} from "@/types/types"
 import { MetricsChart } from "./components/MetricsChart"
 import { WordsAndSentencesChart } from "./components/WordsAndSentencesChart"

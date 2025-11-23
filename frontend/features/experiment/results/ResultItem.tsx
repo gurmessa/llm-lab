@@ -9,16 +9,27 @@ import { cn } from "@/lib/utils";
 interface ResultItemProps {
   run: ExperimentRun;
   rank: number;
-  overallScore?: number;
 }
 
 export const ResultItem = ({
   run,
   rank,
-  overallScore = 98,
 }: ResultItemProps) => {
   const response = run.response;
   const metrics = response?.metrics || {};
+
+  const availableMetricsKeys = Object.keys(metrics).filter((key) => metrics[key] !== undefined && key !== "overall");
+  
+  const metricsToPercentage = (value: any) => {
+    const num = Number(value);
+    if (isNaN(num)) return 0;
+    return Math.ceil(num * 100);
+  }
+  const availableMetrics = availableMetricsKeys.map((key) => ({
+    label: key.charAt(0).toUpperCase() + key.slice(1),
+    value: metricsToPercentage(metrics[key]),
+  }));
+
 
   return (
     <Card className="overflow-hidden border-2 border-border transition-shadow hover:shadow-lg">
@@ -30,7 +41,7 @@ export const ResultItem = ({
         </Badge>
 
         <Badge>
-          Overall Score: {overallScore}%
+          Overall Score: {metricsToPercentage(metrics?.overall)}%
         </Badge>
         </div>
 
@@ -51,10 +62,14 @@ export const ResultItem = ({
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 pt-2">
-          <MetricProgress label="Completeness" value={metrics.completeness } />
-          <MetricProgress label="Coherence" value={metrics.coherence} />
-          <MetricProgress label="Relevance" value={metrics.relevance} />
-          <MetricProgress label="Structure" value={metrics.structure} />
+          {availableMetrics.map((metric) => (
+            <MetricProgress
+              key={metric.label}
+              label={metric.label}
+              value={metric.value}
+            />
+          ))}
+
         </div>
 
         {/* Footer Stats */}

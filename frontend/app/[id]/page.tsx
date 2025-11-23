@@ -1,6 +1,17 @@
+import { ExperimentDetail as Experiment } from "@/types/types";
+import { getExperimentDetail } from '@/services/services';
+import ExperimentPage from "../components/ExperimentPage";
 
-export default function Home() {
+interface PageProps {
+  params: { id: string };
+}
+
+export default async function ExperimentDetail({ params }: PageProps) {
+  const { id } =  await params;
+  const experiment: Experiment = await getExperimentDetail(id);
+
   return (
-    <p>Experiment Detail</p>
+    <ExperimentPage experiment={experiment} />
   );
+
 }

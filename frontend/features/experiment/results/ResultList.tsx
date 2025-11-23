@@ -38,7 +38,6 @@ export const ResultList = ({ experiment }: ResultDetailProps) => {
               key={run.id}
               run={run}
               rank={index + 1}
-              overallScore={run.response?.metrics?.overall_score || 0}
             />
           ))}
         </div>

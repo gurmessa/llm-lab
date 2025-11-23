@@ -61,11 +61,18 @@ const mockExperiment: ExperimentDetail = {
   ],
 };
 
-const ResultsContainer = () => {
+interface ResultsContainerProps {
+  experiment? : ExperimentDetail;
+}
+const ResultsContainer = ({ experiment }: ResultsContainerProps) => {
+  if (!experiment) {
+    return null;
+  }
+  
   return (
     <>
-      <ResultList experiment={mockExperiment} />
-      <ResultChartsContainer experiment={mockExperiment} />
+      <ResultList experiment={experiment} />
+      <ResultChartsContainer experiment={experiment} />
     </>
   );
 };
