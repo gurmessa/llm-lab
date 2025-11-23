@@ -80,7 +80,9 @@ export default function PromptInput({ experiment }: PromptInputProps) {
     setRuns(newRuns);
   };
 
+  const [runningExperiment, setRunningExperiment] = useState(false);
   const handleCreateExperiment = async () => {
+    setRunningExperiment
     try {
       const experiment = {
         user_prompt: prompt,
@@ -92,17 +94,23 @@ export default function PromptInput({ experiment }: PromptInputProps) {
           max_output_tokens: maxTokens || 20,
         })),
       };
+      setRunningExperiment(true);
       const result = await createExperiment(experiment);
       toast.success("Experiment runned successfully!");
       router.push(`/${result.id}`);
     } catch (error) {
+      setRunningExperiment(false);
       toast.error("Failed to run experiment.");
     }
   }
 
+  const [exportingCsv, setExportingCsv] = useState(false);
+
   const handleExportCsv = async () => {
     if (!experiment) return;
+    setExportingCsv(true);
     await exportExperimentCsv(experiment.id);
+    setExportingCsv(false);
   }
 
   return (
@@ -204,11 +212,11 @@ export default function PromptInput({ experiment }: PromptInputProps) {
 
         {/* Run & Export Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-          <Button onClick={handleCreateExperiment} className="">
-            Run Experiments
+          <Button onClick={handleCreateExperiment} className="" disabled={runningExperiment}>
+            {runningExperiment ? "Running..." : "Run Experiments"}
           </Button>
-          <Button onClick={handleExportCsv} variant="outline" disabled={!experiment}>
-            Export CSV
+          <Button onClick={handleExportCsv} variant="outline" disabled={!experiment || exportingCsv}>
+            {exportingCsv ? "Exporting..." : "Export CSV"}
           </Button>
         </div>
       </div>
