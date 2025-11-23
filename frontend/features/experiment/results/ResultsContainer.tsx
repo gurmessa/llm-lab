@@ -1,4 +1,5 @@
 import { ResultList } from "./ResultList";
+import {ResultChartsContainer} from "./Charts/ResultChartsContainer";
 import { ExperimentDetail, ResponseStatus, ExperimentStatus } from "@/types/types";
 
 const mockExperiment: ExperimentDetail = {
@@ -61,7 +62,12 @@ const mockExperiment: ExperimentDetail = {
 };
 
 const ResultsContainer = () => {
-  return <ResultList experiment={mockExperiment} />;
+  return (
+    <>
+      <ResultList experiment={mockExperiment} />
+      <ResultChartsContainer experiment={mockExperiment} />
+    </>
+  );
 };
 
 export default ResultsContainer;

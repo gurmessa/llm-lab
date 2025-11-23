@@ -66,7 +66,7 @@ export default function PromptInput() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 sm:p-8">
+    <div className="bg-background p-4 sm:p-8">
       <div className="max-w-4xl mx-auto space-y-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
           Experiment
