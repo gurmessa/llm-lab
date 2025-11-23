@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import HistorySideBar from "../features/history/HistorySidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
- 
+import { Toaster } from "sonner";
+
 
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
             </div>
           </div>
         </SidebarProvider>
+        <Toaster richColors closeButton /> 
       </body>
     </html>
   );

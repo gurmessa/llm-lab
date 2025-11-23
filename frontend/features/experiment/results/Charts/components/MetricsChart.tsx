@@ -14,14 +14,16 @@ interface MetricsChartProps {
 }
 
 export function MetricsChart({ experiment }: MetricsChartProps) {
-  const metricsData = experiment.runs.map((run, index) => ({
-    run: `Run ${index + 1} (Temp: ${run.temperature}, Top P: ${run.top_p})`,
-    overall: run?.response?.metrics?.overall_score,
-    completeness: run?.response?.metrics?.completeness,
-    coherence: run?.response?.metrics?.coherence,
-    relevance: run?.response?.metrics?.relevance,
-    structure: run?.response?.metrics?.structure,
-  }))
+  const toPct = (v?: number | null) => v != null ? Math.ceil(v * 100) : null;
+
+const metricsData = experiment.runs.map((run, index) => ({
+  run: `Run ${index + 1} (Temp: ${run.temperature}, Top P: ${run.top_p})`,
+  overall: toPct(run?.response?.metrics?.overall),
+  completeness: toPct(run?.response?.metrics?.completeness),
+  coherence: toPct(run?.response?.metrics?.coherence),
+  relevance: toPct(run?.response?.metrics?.relevance),
+  structure: toPct(run?.response?.metrics?.structure),
+}));
 
   const metricsConfig = {
     overall: { label: "Overall", color: "var(--chart-1)" },

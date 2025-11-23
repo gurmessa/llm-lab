@@ -10,7 +10,7 @@ export default function ExperimentPage({ experiment }: ExperimentPageProps) {
 
     return (
         <div>
-            <PromptInput />
+            <PromptInput experiment={experiment} />
             <ResultsContainer experiment={experiment} />
         </div>
     );

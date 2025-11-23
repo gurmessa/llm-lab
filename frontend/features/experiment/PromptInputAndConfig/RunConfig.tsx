@@ -20,20 +20,20 @@ export const RunConfig = ({
   onTopPChange,
 }: RunConfigProps) => {
   return (
-    <div className="rounded-2xl bg-muted p-4 sm:p-6 space-y-4 sm:space-y-6">
-      <h3 className="text-sm sm:text-base font-medium text-foreground">
+    <div className="rounded-2xl bg-gray-200 p-4 sm:p-6 space-y-4 sm:space-y-6">
+      <h3 className="text-sm sm:text-base font-medium text-foreground mb-0">
         Run {runNumber}
       </h3>
 
       {/* Temperature */}
-      <div className="space-y-2">
+      <div className="">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
           <Label className="text-sm text-muted-foreground">Temp</Label>
           <Input
             type="number"
             value={temp}
             onChange={(e) => onTempChange(parseFloat(e.target.value) || 0)}
-            className="w-full sm:w-16 h-8 text-center text-sm"
+            className="w-full sm:w-24 h-8 text-center text-sm"
             min={0}
             max={2}
             step={0.1}
@@ -50,14 +50,14 @@ export const RunConfig = ({
       </div>
 
       {/* Top P */}
-      <div className="space-y-2">
+      <div className="">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
           <Label className="text-sm text-muted-foreground">Top P</Label>
           <Input
             type="number"
             value={topP}
             onChange={(e) => onTopPChange(parseFloat(e.target.value) || 0)}
-            className="w-full sm:w-16 h-8 text-center text-sm"
+            className="w-full sm:w-24 h-8 text-center text-sm"
             min={0}
             max={1}
             step={0.1}

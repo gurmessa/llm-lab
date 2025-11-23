@@ -20,29 +20,44 @@ import {
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { RunConfig } from "./RunConfig";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { createExperiment } from "@/services/services";
+import { ExperimentDetail } from "@/types/types";
 
 interface RunSettings {
   temp: number;
   topP: number;
 }
+interface PromptInputProps {
+    experiment? : ExperimentDetail; 
+}
 
-export default function PromptInput() {
-  const [prompt, setPrompt] = useState("");
-  const [numberOfRuns, setNumberOfRuns] = useState(2);
-  const [runs, setRuns] = useState<RunSettings[]>([
+export default function PromptInput({ experiment }: PromptInputProps) {
+  const [prompt, setPrompt] = useState(experiment ? experiment.user_prompt : "");
+  const [numberOfRuns, setNumberOfRuns] = useState(experiment ? experiment.total_runs : 2);
+  const [runs, setRuns] = useState<RunSettings[]>(
+    experiment
+      ? experiment.runs.map((run) => ({
+          temp: run.temperature,
+          topP: run.top_p,
+        }))
+      :
+    [
     { temp: 1, topP: 1 },
     { temp: 1, topP: 1 },
   ]);
-  const [llmModel, setLlmModel] = useState("gpt 5");
-  const [maxTokens, setMaxTokens] = useState("20");
+  const [llmModel, setLlmModel] = useState(experiment ? experiment.model_name : "gpt-4.1-nano");
+  const [maxTokens, setMaxTokens] = useState(experiment && experiment.runs.length > 0 ? experiment.runs[0].max_output_tokens : 200);
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
+
+  const router = useRouter();
 
   const handleNumberOfRunsChange = (value: string) => {
     const num = parseInt(value) || 1;
     setNumberOfRuns(num);
 
     const newRuns = [...runs];
-    while (newRuns.length < num) newRuns.push({ temp: 2, topP: 1 });
+    while (newRuns.length < num) newRuns.push({ temp: 1, topP: 1 });
     while (newRuns.length > num) newRuns.pop();
     setRuns(newRuns);
   };
@@ -59,11 +74,32 @@ export default function PromptInput() {
 
   const handleAutoFill = () => {
     const newRuns = runs.map(() => ({
-      temp: Math.random() * 2,
-      topP: Math.random(),
+      temp: Number((Math.random() * 2).toFixed(2)),
+      topP: Number(Math.random().toFixed(2)),
     }));
     setRuns(newRuns);
   };
+
+  const handleCreateExperiment = async () => {
+    try {
+      const experiment = {
+        user_prompt: prompt,
+        model_name: llmModel,
+        total_runs: numberOfRuns,
+        runs: runs.map((run) => ({
+          temperature: run.temp,
+          top_p: run.topP,
+          max_output_tokens: maxTokens || 20,
+        })),
+      };
+      const result = await createExperiment(experiment);
+      toast.success("Experiment runned successfully!");
+      router.push(`/${result.id}`);
+    } catch (error) {
+      toast.error("Failed to run experiment.");
+    }
+  }
+
 
   return (
     <div className="bg-background p-4 sm:p-8">
@@ -105,9 +141,8 @@ export default function PromptInput() {
           <Button
             onClick={handleAutoFill}
             variant="secondary"
-            className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-medium"
           >
-            Auto-fill parameters
+            Auto-fill Random Parameters
           </Button>
         </div>
 
@@ -141,9 +176,8 @@ export default function PromptInput() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="gpt 5">gpt 5</SelectItem>
-                  <SelectItem value="gpt 4">gpt 4</SelectItem>
-                  <SelectItem value="claude 3">claude 3</SelectItem>
+                  <SelectItem value="gpt-4.1-nano">gpt-4.1-nano</SelectItem>
+                  <SelectItem value="gpt-4.1-mini">gpt-4.1-mini</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -156,7 +190,7 @@ export default function PromptInput() {
                 id="tokens"
                 type="number"
                 value={maxTokens}
-                onChange={(e) => setMaxTokens(e.target.value)}
+                onChange={(e) => setMaxTokens(Number(e.target.value))}
                 className="w-full sm:w-[180px]"
                 min={1}
               />
@@ -166,7 +200,7 @@ export default function PromptInput() {
 
         {/* Run & Export Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-3 w-full sm:w-auto">
+          <Button onClick={handleCreateExperiment} className="">
             Run Experiments
           </Button>
           <Button className="border-2 font-medium px-8 py-3 w-full sm:w-auto" variant="outline" disabled>
