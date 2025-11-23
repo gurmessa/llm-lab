@@ -45,7 +45,7 @@ export interface ExperimentRunCreate {
 }
 
 // Experiment List
-export interface ExperimentList {
+export interface Experiment {
   id: number;
   name?: string;
   total_runs: number;

@@ -1,8 +1,6 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <p>Experiment </p>
+    <p>Experiment Main </p>
   );
 }

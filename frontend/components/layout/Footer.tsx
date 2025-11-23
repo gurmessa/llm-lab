@@ -1,5 +1,7 @@
-export default function Head() {
+export default function Footer() {
   return (
-    <p>Footer Content</p>
+    <footer className="border-t p-4 text-center">
+      © 2025 My App
+    </footer>
   );
 }
