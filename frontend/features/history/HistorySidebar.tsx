@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -15,16 +16,24 @@ import {
 import { PlusSquare } from "lucide-react";
 import HistoryItem from "./HistoryItem";
 import { Experiment, ExperimentStatus } from "@/types/types";
+import { listExperiments } from "@/services/services";
 
 
 export default function HistorySidebar() {
-  const historyList: Experiment[] = [
+  /*const historyList: Experiment[] = [
     { id: 1, name: "Experiment 1 Long Name ", total_runs: 5, status: ExperimentStatus.COMPLETED, created_at: new Date().toISOString() },
     { id: 2, name: "Experiment 2", total_runs: 3, status: ExperimentStatus.RUNNING, created_at: new Date(Date.now() - 86400000).toISOString() }, // yesterday's date
     { id: 3, name: "Experiment 3", total_runs: 8, status: ExperimentStatus.FAILED, created_at: new Date().toISOString() },
     { id: 4, name: "Experiment 4", total_runs: 2, status: ExperimentStatus.PENDING, created_at: new Date().toISOString() },
     { id: 5, name: "Experiment 5", total_runs: 10, status: ExperimentStatus.PARTIAL, created_at: new Date().toISOString() },
-  ];
+  ];*/
+
+  const [experiments, setExperiments] = useState<Experiment[]>([]);
+
+  useEffect(() => {
+    listExperiments().then(setExperiments).catch(console.error);
+  }, []);
+
 
   const { state } = useSidebar();
 
@@ -63,7 +72,7 @@ export default function HistorySidebar() {
             <SidebarGroupLabel>History</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {historyList.map((item) => (
+                {experiments.map((item) => (
                   <HistoryItem key={item.id} experiment={item} />
                 ))}
               </SidebarMenu>
