@@ -1,6 +1,15 @@
 # Use a Python base image
 FROM python:3.11-slim
 
+
+# Install system libraries required for Python packages
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libffi-dev \
+    libssl-dev \
+    libc6-dev \
+    && rm -rf /var/lib/apt/lists/*
+    
 # Set the working directory
 WORKDIR /app
 
