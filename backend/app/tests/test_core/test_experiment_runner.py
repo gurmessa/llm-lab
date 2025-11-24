@@ -14,15 +14,15 @@ from app.services.llm.constants import (
 def test_experiment_runner_run():
     user_prompt = "Hello, LLM!"
 
-    # Mock OpenAIResponder.run to return a fixed response
+    # Mock OpenAIResponder.run
     with patch("app.services.core.experiment_runner.OpenAIResponder") as MockResponder:
         mock_responder_instance = MockResponder.return_value
         mock_responder_instance.run.return_value = "mocked response"
 
-        # Mock OverallMetric.evaluate to return a fixed score
+        # Mock OverallMetric.compute
         with patch("app.services.core.experiment_runner.OverallMetric") as MockMetric:
             mock_metric_instance = MockMetric.return_value
-            mock_metric_instance.evaluate.return_value = {"score": 1.0}
+            mock_metric_instance.compute.return_value = {"score": 1.0}
 
             runner = ExperimentRunner()
             result = runner.run(user_prompt)
@@ -31,11 +31,10 @@ def test_experiment_runner_run():
             assert result["llm_response"] == "mocked response"
             assert result["metrics"] == {"score": 1.0}
 
-            # Ensure mocks were called with correct arguments
             mock_responder_instance.run.assert_called_once_with(
                 user_prompt,
                 temperature=DEFAULT_TEMPERATURE,
                 top_p=DEFAULT_TOP_P,
                 max_tokens=DEFAULT_MAX_TOKENS,
             )
-            mock_metric_instance.evaluate.assert_called_once_with("mocked response")
+            mock_metric_instance.compute.assert_called_once_with("mocked response")
