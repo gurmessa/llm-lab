@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libc6-dev \
     && rm -rf /var/lib/apt/lists/*
-    
+
 # Set the working directory
 WORKDIR /app
 
@@ -22,6 +22,12 @@ COPY . /app
 
 # Expose the port
 EXPOSE 8083
+
+# Pre-download NLTK punkt tokenizer
+RUN python -m nltk.downloader -d /app/nltk_data punkt
+
+# Set environment variable so NLTK uses pre-downloaded data
+ENV NLTK_DATA=/app/nltk_data
 
 # Start the application using Uvicorn
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8083"]
