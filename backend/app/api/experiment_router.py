@@ -26,7 +26,7 @@ def list_experiments(db: Session = Depends(get_db)):
     return experiments
 
 
-@router.get("/{experiment_id}", response_model=ExperimentDetailSchema)
+@router.get("/{experiment_id}/", response_model=ExperimentDetailSchema)
 def get_experiment_detail(experiment_id: int, db: Session = Depends(get_db)):
     """
     Get detailed experiment information with associated runs and responses
@@ -81,7 +81,7 @@ def create_experiment(
     return experiment
 
 
-@router.get("/{experiment_id}/export/csv")
+@router.get("/{experiment_id}/export/csv/")
 def export_experiment_csv(experiment_id: int, db: Session = Depends(get_db)):
     experiment = db.query(Experiment).filter(Experiment.id == experiment_id).first()
     if not experiment:
