@@ -8,7 +8,7 @@ Frontend,UI/UX #7,2,3,4,,https://github.com/gurmessa/llm-lab/issues/7
 Frontend,setup FE project #8,1,2,1,,https://github.com/gurmessa/llm-lab/issues/8
 Frontend,Build UI #9,5,10,9,,https://github.com/gurmessa/llm-lab/issues/9
 LLM Generation & Custom metrics,"LLM Integration ",2,4,2,,https://github.com/gurmessa/llm-lab/issues/24
-LLM Generation & Custom metrics,Implement Metrics #25,6,10,10,more metrics will be added,https://github.com/gurmessa/llm-lab/issues/25
+LLM Generation & Custom metrics,Implement Metrics #25,6,10,12,,https://github.com/gurmessa/llm-lab/issues/25
 Documentation,README & Architectural Docs #17,2,3,,,https://github.com/gurmessa/llm-lab/issues/17
 Deployment,containerize #20,1,2,1,,https://github.com/gurmessa/llm-lab/issues/20
 Deployment,CI/CD using github actions #21,2,4,,,https://github.com/gurmessa/llm-lab/issues/21
