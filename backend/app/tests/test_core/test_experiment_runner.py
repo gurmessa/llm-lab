@@ -19,10 +19,10 @@ def test_experiment_runner_run():
         mock_responder_instance = MockResponder.return_value
         mock_responder_instance.run.return_value = "mocked response"
 
-        # Mock OverallMetric.evaluate to return a fixed score
+        # Mock OverallMetric.compute to return a fixed score
         with patch("app.services.core.experiment_runner.OverallMetric") as MockMetric:
             mock_metric_instance = MockMetric.return_value
-            mock_metric_instance.evaluate.return_value = {"score": 1.0}
+            mock_metric_instance.compute.return_value = {"score": 1.0}
 
             runner = ExperimentRunner()
             result = runner.run(user_prompt)
@@ -38,4 +38,4 @@ def test_experiment_runner_run():
                 top_p=DEFAULT_TOP_P,
                 max_tokens=DEFAULT_MAX_TOKENS,
             )
-            mock_metric_instance.evaluate.assert_called_once_with("mocked response")
+            mock_metric_instance.compute.assert_called_once_with("mocked response")

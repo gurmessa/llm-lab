@@ -10,7 +10,6 @@ def test_openai_responder():
 
     response = responder.run(prompt, temperature=1, top_p=1.0, max_tokens=5)
 
-    print("OpenAI response:", response)
     assert isinstance(response, str)
     assert len(response) > 0
 
