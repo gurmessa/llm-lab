@@ -14,6 +14,7 @@ import {
   useSidebar
 } from "@/components/ui/sidebar";
 import { PlusSquare } from "lucide-react";
+import { toast } from "sonner";
 import HistoryItem from "./HistoryItem";
 import { Experiment, ExperimentStatus } from "@/types/types";
 import { listExperiments } from "@/services/services";
@@ -28,7 +29,11 @@ export default function HistorySidebar() {
 
   useEffect(() => {
     setLoading(true);
-    listExperiments().then(setExperiments).catch(console.error).finally(() => setLoading(false));
+    listExperiments().then(setExperiments).catch(
+      (error) => {
+        toast.error("Failed to load experiment history.");
+      }
+    ).finally(() => setLoading(false));
   }, []);
 
 
