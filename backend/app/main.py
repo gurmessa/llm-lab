@@ -5,6 +5,8 @@ from .api.experiment_router import router as experiment_router
 
 app = FastAPI(title="LLM Lab Backend")
 
+app.router.redirect_slashes = False
+
 # Allow all origins
 app.add_middleware(
     CORSMiddleware,
