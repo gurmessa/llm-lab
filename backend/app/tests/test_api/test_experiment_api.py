@@ -98,7 +98,7 @@ class TestExperimentAPI:
 
     def test_get_experiment_detail_not_found(self, client):
         """Test getting experiment detail when experiment doesn't exist"""
-        response = client.get("/experiments/999")
+        response = client.get("/experiments/999/")
         assert response.status_code == 404
         assert response.json()["detail"] == "Experiment not found"
 
@@ -116,7 +116,7 @@ class TestExperimentAPI:
         test_db.commit()
         test_db.refresh(exp)
 
-        response = client.get(f"/experiments/{exp.id}")
+        response = client.get(f"/experiments/{exp.id}/")
         assert response.status_code == 200
 
         data = response.json()
@@ -180,7 +180,7 @@ class TestExperimentAPI:
         test_db.add(response2)
         test_db.commit()
 
-        response = client.get(f"/experiments/{exp.id}")
+        response = client.get(f"/experiments/{exp.id}/")
         assert response.status_code == 200
 
         data = response.json()
@@ -443,7 +443,7 @@ class TestExportExperimentCSVAPI:
         test_db.commit()
 
         # Call the CSV export endpoint
-        resp = client.get(f"/experiments/{experiment.id}/export/csv")
+        resp = client.get(f"/experiments/{experiment.id}/export/csv/")
 
         assert resp.status_code == 200
         assert "text/csv" in resp.headers["content-type"]

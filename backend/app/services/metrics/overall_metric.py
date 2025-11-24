@@ -1,15 +1,21 @@
 from .base import Metric
 from .coherence_metric import CoherenceMetric
+from .lexical_diversity_metric import LexicalDiversityMetric
+from .relevance_metric import RelevanceMetric
 from .structural_metric import StructuralMetric
 
 METRIC_CLASSES = {
     "coherence": CoherenceMetric,
     "structure": StructuralMetric,
+    "relevance": RelevanceMetric,
+    "lexical_diversity": LexicalDiversityMetric,
 }
 
 METRIC_WEIGHTS = {
     "coherence": 1,
     "structure": 1,
+    "relevance": 1,
+    "lexical_diversity": 1,
 }
 
 

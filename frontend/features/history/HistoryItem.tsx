@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Clock } from "lucide-react";
 import { Experiment, ExperimentStatus } from "@/types/types";
 import moment from "moment";
+import Link from "next/link";
 
 interface ExperimentItemProps {
   experiment: Experiment;
@@ -33,7 +34,7 @@ export default function HistoryItem({ experiment }: ExperimentItemProps) {
 
   return (
     <SidebarMenuItem>
-      <a
+      <Link
         href={`/${experiment.id}`}
         className="flex flex-col gap-2 p-3 bg-background rounded-lg shadow-sm hover:shadow-md transition-shadow duration-150 hover:bg-accent/10"
       >
@@ -53,7 +54,7 @@ export default function HistoryItem({ experiment }: ExperimentItemProps) {
         <div className="text-sm text-muted-foreground mt-1">
           {humanDate}
         </div>
-      </a>
+      </Link>
     </SidebarMenuItem>
   );
 }
