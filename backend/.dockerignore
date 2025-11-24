@@ -1,0 +1,11 @@
+# Ignore directories and files not needed in the final image
+.git
+.github
+.pytest_cache/
+**/__pycache__/
+.env
+.env.example
+.vscode/
+*.db
+*.sqlite
+docs/
