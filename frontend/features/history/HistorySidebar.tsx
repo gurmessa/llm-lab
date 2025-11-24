@@ -19,7 +19,7 @@ import HistoryItem from "./HistoryItem";
 import { Experiment, ExperimentStatus } from "@/types/types";
 import { listExperiments } from "@/services/services";
 import { Spinner } from "@/components/ui/spinner"
-
+import Link from "next/link";
 
 export default function HistorySidebar() {
 
@@ -57,10 +57,10 @@ export default function HistorySidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/">
+                  <Link href="/">
                     <PlusSquare />
                     <span>New Experiment</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

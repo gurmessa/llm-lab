@@ -19,7 +19,7 @@ export const ResultList = ({ experiment }: ResultDetailProps) => {
   }, [experiment.runs]);
 
   return (
-    <div className="min-h-screen bg-background p-6 md:p-8 lg:p-12">
+    <div className="bg-background p-6 md:p-8 lg:p-12">
       <div className="mx-auto max-w-5xl space-y-8">
         {/* Header */}
         <div className="space-y-2">
