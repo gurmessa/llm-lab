@@ -26,7 +26,7 @@ export const ResultItem = ({
     return Math.ceil(num * 100);
   }
   const availableMetrics = availableMetricsKeys.map((key) => ({
-    label: key.charAt(0).toUpperCase() + key.slice(1),
+    label: key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, " "),
     value: metricsToPercentage(metrics[key]),
   }));
 

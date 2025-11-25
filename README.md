@@ -196,3 +196,4 @@ LLM Lab follows a client-server architecture with a Next.js frontend communicati
 - Integrate additional embeddings, e.g., Sentence Transformers
 - Make FastAPI async and use `asyncio` for concurrent metrics and tasks  
 - Render Markdown on the frontend for better UI display
+- Automatically generate experiment names using LLM

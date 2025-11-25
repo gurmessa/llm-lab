@@ -12,8 +12,8 @@ export const ResultList = ({ experiment }: ResultDetailProps) => {
   // Memoize sorting for performance
   const rankedRuns = useMemo(() => {
     return [...experiment.runs].sort((a, b) => {
-      const scoreA = a.response?.metrics?.overall_score || 0;
-      const scoreB = b.response?.metrics?.overall_score || 0;
+      const scoreA = a.response?.metrics?.overall || 0;
+      const scoreB = b.response?.metrics?.overall || 0;
       return scoreB - scoreA;
     });
   }, [experiment.runs]);
