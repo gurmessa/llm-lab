@@ -16,7 +16,7 @@ interface WordsAndSentencesChartProps {
 export function WordsAndSentencesChart({ experiment }: WordsAndSentencesChartProps) {
   // Prepare chart data
   const wordsSentencesData = experiment.runs.map((run, index) => ({
-    run: `Run ${index + 1} (Temp: ${run.temperature}, Top P: ${run.top_p})`,
+    run: `Run ${index + 1} (T: ${run.temperature}, P: ${run.top_p})`,
     words: run?.response?.total_words,
     sentences: run?.response?.total_sentences,
   }))

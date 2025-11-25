@@ -17,20 +17,20 @@ export function MetricsChart({ experiment }: MetricsChartProps) {
   const toPct = (v?: number | null) => v != null ? Math.ceil(v * 100) : null;
 
 const metricsData = experiment.runs.map((run, index) => ({
-  run: `Run ${index + 1} (Temp: ${run.temperature}, Top P: ${run.top_p})`,
+  run: `Run ${index + 1} (T: ${run.temperature}, P: ${run.top_p})`,
   overall: toPct(run?.response?.metrics?.overall),
-  completeness: toPct(run?.response?.metrics?.completeness),
   coherence: toPct(run?.response?.metrics?.coherence),
   relevance: toPct(run?.response?.metrics?.relevance),
   structure: toPct(run?.response?.metrics?.structure),
+  lexical_diversity: toPct(run?.response?.metrics?.lexical_diversity),
 }));
 
   const metricsConfig = {
     overall: { label: "Overall", color: "var(--chart-1)" },
-    completeness: { label: "Completeness", color: "var(--chart-2)" },
     coherence: { label: "Coherence", color: "var(--chart-3)" },
     relevance: { label: "Relevance", color: "var(--chart-4)" },
     structure: { label: "Structure", color: "var(--chart-5)" },
+    lexical_diversity: { label: "Lexical Diversity", color: "var(--chart-6)" },
   }
 
   return (

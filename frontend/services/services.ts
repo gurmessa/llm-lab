@@ -14,7 +14,7 @@ export async function getExperimentDetail(id: string): Promise<ExperimentDetail>
 }
 
 export async function createExperiment(experiment: ExperimentCreate): Promise<ExperimentDetail> {
-  const { data } = await api.post("/experiments/", experiment);
+  const { data } = await api.post("/experiments/", experiment, {timeout: 120000});
   return data;
 }
 
