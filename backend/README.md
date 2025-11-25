@@ -26,27 +26,6 @@ LLM Lab is a platform for running controlled experiments with Large Language Mod
 - **Testing**: Pytest
 - **Code Quality**: Black (formatter), Isort (import sorter)
 
-## Architecture
-
-```
-┌─────────────────┐    ┌──────────────────┐    ┌────────────────────┐
-│   Frontend      │───▶│   FastAPI        │───▶│   SQLite Database  │
-│   (Next.js)     │    │   Backend        │    │   (via SQLAlchemy) │
-└─────────────────┘    └──────────────────┘    └────────────────────┘
-                                │
-                                ▼
-                     ┌────────────────────┐
-                     │   OpenAI API       │
-                     │   Integration      │
-                     └────────────────────┘
-                                │
-                                ▼
-                   ┌──────────────────────────┐
-                   │   Metrics Calculation    │
-                   │   (Coherence, Relevance, │
-                   │    Structure, Diversity) │
-                   └──────────────────────────┘
-```
 
 ### Core Components
 
