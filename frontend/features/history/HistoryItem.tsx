@@ -14,7 +14,8 @@ interface ExperimentItemProps {
 
 export default function HistoryItem({ experiment }: ExperimentItemProps) {
 
-  const humanDate = moment(experiment.created_at).fromNow(); // e.g., "3 hours ago"
+  const humanDate = moment.utc(experiment.created_at).local().fromNow()
+  
   const statusVariant = (() => {
     switch (experiment.status) {
       case ExperimentStatus.RUNNING:
