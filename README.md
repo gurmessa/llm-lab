@@ -128,6 +128,16 @@ LLM Lab follows a client-server architecture with a Next.js frontend communicati
   <img src="docs/wireframes/llm-lab-wireframe.png" width="400">
 </details>
 
+<details open>
+  <summary>Screenshots</summary>
+  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+    <img src="docs/screenshots/screenshot1.png" alt="Screenshot 1" style="width: 40%;">
+    <img src="docs/screenshots/screenshot2.png" alt="Screenshot 2" style="width: 40%;">
+    <img src="docs/screenshots/screenshot3.png" alt="Screenshot 3" style="width: 40%;">
+  </div>
+</details>
+
+
 ## Deployment Choices
 
 ### Hosting Platform
@@ -178,11 +188,11 @@ LLM Lab follows a client-server architecture with a Next.js frontend communicati
 3. **Visualization Needs**: Charts and metrics provide sufficient analysis capabilities
 4. **Export Requirements**: CSV export meets data sharing needs
 
-<details open>
-  <summary>Screenshots</summary>
-  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-    <img src="docs/screenshots/screenshot1.png" alt="Screenshot 1" style="width: 30%;">
-    <img src="docs/screenshots/screenshot2.png" alt="Screenshot 2" style="width: 30%;">
-    <img src="docs/screenshots/screenshot3.png" alt="Screenshot 3" style="width: 30%;">
-  </div>
-</details>
+
+### Improvements
+- Run background tasks using Celery with WebSocket support
+- Track users via authentication or by IP address (with README documentation)
+- Set up CI/CD pipeline for automated testing and deployment
+- Integrate additional embeddings, e.g., Sentence Transformers
+- Make FastAPI async and use `asyncio` for concurrent metrics and tasks  
+- Render Markdown on the frontend for better UI display
