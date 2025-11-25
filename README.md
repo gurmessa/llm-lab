@@ -8,6 +8,11 @@ See [backend README](backend/README.md) for backend details.
 ### Frontend Documentation
 See [frontend README](frontend/README.md) for frontend details.
 
+##  Project Board
+Track the roadmap and tasks on the GitHub Project board:  [Project Board](https://github.com/users/gurmessa/projects/3)
+
+
+
 ## Quality Metrics Explanation
 
 LLM Lab uses a comprehensive set of metrics to evaluate the quality of LLM responses. These metrics are implemented in the backend services and provide quantitative measures for different aspects of response quality:
