@@ -1,5 +1,5 @@
 import numpy as np
-
+from sklearn.metrics.pairwise import cosine_similarity
 from ..embedding.openai_embedding import OpenAIEmbeddingProvider
 from .base import Metric
 
@@ -18,9 +18,12 @@ class RelevanceMetric(Metric):
         """Compute cosine similarity between two vectors and normalize to 0-1."""
         if vec1.size == 0 or vec2.size == 0:
             return 0.0
+        cos_sim = cosine_similarity([vec1], [vec2])[0][0]
+        """
         cos_sim = float(
             np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
         )
+        """
         # Normalize to 0-1
         return (cos_sim + 1) / 2
 

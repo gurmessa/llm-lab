@@ -14,7 +14,7 @@ METRIC_CLASSES = {
 METRIC_WEIGHTS = {
     "coherence": 1,
     "structure": 1,
-    "relevance": 1,
+    "relevance": 2,
     "lexical_diversity": 1,
 }
 
