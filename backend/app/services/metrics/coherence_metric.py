@@ -28,7 +28,9 @@ class CoherenceMetric(Metric):
         ]
         final_score = float(np.mean(sim_scores))
 
-        final_score = max(0.0, min(1.0, final_score))
+        # final_score = max(0.0, min(1.0, final_score))
+        final_score = (final_score + 1) / 2
+
         """
         # Simple linear scaling based on observed min/max
         min_raw = 0.1   # empirically determined for incoherent text
